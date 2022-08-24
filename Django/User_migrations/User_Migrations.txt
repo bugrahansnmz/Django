@@ -1,0 +1,1 @@
+Ekstra User tablosu oluşturmadığım için bu klasördeki auth sınıfına eklemeler yaptım. phone,isEmployer .. gibi. Çalıştırmadan önce bu migration'ı da yapmalısınız.

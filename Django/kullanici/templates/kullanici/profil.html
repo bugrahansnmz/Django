@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block title %} Profilim {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <nav class="nav flex-column side-nav">
+                <a class="nav-link active icon" href="{% url 'profil' %}">
+                    <i class="fa fa-user"></i>Profilim
+                </a>
+                <a class="nav-link active icon" href="{% url 'password' %}">
+                    <i class="fa fa-user"></i>Şifremi Değiştir
+                </a>
+                {% if user.isEmployer %}
+                <a class="nav-link icon" href="{% url 'add_advert' %}">
+                    <i class="fas fa-pen"></i>İş İlanı Paylaş
+                </a>
+                {% endif %}
+            </nav>
+        </div>
+        <!--end col-md-3-->
+        <div class="col-md-9">
+            <form class="form" action="{% url 'profil_update' user.id %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>Profil Bilgilerim</h2>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="firstname" class="col-form-label required">İsim</label>
+                                        <input name="firstname" type="text" class="form-control" id="firstname" value={{user.first_name}} required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastname" class="col-form-label required">Soyisim</label>
+                                        <input name="lastname" type="text" class="form-control" id="lastname" value={{user.last_name}} required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="col-form-label required">Kullanıcı Adı</label>
+                                        <input name="username" type="text" class="form-control" id="username" value={{user.username}} required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>{% if user.isEmployer %}
+                                            <input type="checkbox" name="isEmployer" value="0" checked id="isEmployer" >
+                                            {% else %}
+                                            <input type="checkbox" name="isEmployer" value="1" id="isEmployer" >
+                                            {% endif %}
+                                            İş veren misin?
+                                        </label>
+                                    </div>
+                                    <!--end form-group-->
+                                </div>
+                                <!--end col-md-8-->
+                            </div>
+                        </section>
+
+                        <section>
+                            <h2>Contact</h2>
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Telefon</label>
+                                <input name="phone" type="text" class="form-control" id="phone" placeholder="5303216548" value={{user.phone}}>
+                            </div>
+                            <!--end form-group-->
+                            <div class="form-group">
+                                <label for="email" class="col-form-label">Email</label>
+                                <input name="email" type="email" class="form-control" id="email" placeholder="Your Email" value={{user.email}}>
+                            </div>
+                            <!--end form-group-->
+                        </section>
+                        <section class="clearfix">
+                            <button type="submit" class="btn btn-primary float-right">Güncelle</button>
+                        </section>
+                    </div>
+                    <!--end col-md-8-->
+                    <div class="col-md-4">
+                        <div class="profile-image">
+                            <div class="image background-image">
+                                <img src="assets/img/author-09.jpg" alt="">
+                            </div>
+                            <div class="single-file-input">
+                                <input type="file" id="user_image" name="user_image">
+                                <div class="btn btn-framed btn-primary small">Fotoğraf Yükle</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end col-md-3-->
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--end row-->
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block title %} Profilim {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <nav class="nav flex-column side-nav">
+                <a class="nav-link active icon" href="{% url 'profil' %}">
+                    <i class="fa fa-user"></i>Profilim
+                </a>
+                <a class="nav-link active icon" href="my-profile.html">
+                    <i class="fa fa-user"></i>Şifremi Değiştir
+                </a>
+                {% if user.isEmployer %}
+                <a class="nav-link icon" href="{% url 'add_advert' %}">
+                    <i class="fas fa-pen"></i>İş İlanı Paylaş
+                </a>
+                {% endif %}
+            </nav>
+        </div>
+        <div class="col-md-9">
+            <form class="form" action="{% url 'add_advert'  %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>İş İlanı Paylaş</h2>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="advert_name" class="col-form-label required">İş Adı</label>
+                                        <input name="advert_name" type="text" class="form-control" id="advert_name"  required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="advert_desc" class="col-form-label required">Açıklama</label>
+                                        <input name="advert_desc" type="text" class="form-control" id="advert_desc"  required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="advert_city" class="col-form-label required">Şehir</label>
+                                        <input name="advert_city" type="text" class="form-control" id="advert_city" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="advert_company" class="col-form-label required">Şirket</label>
+                                        <input name="advert_company" type="text" class="form-control" id="advert_company" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="advert_experience" class="col-form-label required">Deneyim</label>
+                                        <input name="advert_experience" type="text" class="form-control" id="advert_experience" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="education_level" class="col-form-label required">Eğitim Düzeyi</label>
+                                        <input name="education_level" type="text" class="form-control" id="education_level" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="clearfix">
+                            <button type="submit" class="btn btn-primary float-right">İlanı Paylaş</button>
+                        </section>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--end row-->
+</div>
+
+
+{% endblock %}
